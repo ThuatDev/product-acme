@@ -1,0 +1,41 @@
+// MainComponent.js
+import React, { useState } from 'react';
+import CategoryList from './CategoryList';
+import ProductList from './ProductList';
+import SortOptions from './SortOptions';
+import "../App.css";
+const MainComponent = () => {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [sortOption, setSortOption] = useState('default');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSortChange = (option) => {
+    setSortOption(option);
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  return (
+    <div className='' >
+      <input
+        type="text"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
+      <div className='container'>
+      <CategoryList setSelectedCategory={setSelectedCategory} />
+      <ProductList
+        selectedCategory={selectedCategory}
+        sortOption={sortOption}
+        searchTerm={searchTerm}
+      />
+      <SortOptions handleSortChange={handleSortChange} />
+      </div>
+    </div>
+  );
+};
+
+export default MainComponent;
